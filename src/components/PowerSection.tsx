@@ -30,77 +30,120 @@ const PowerSection: React.FC = () => {
     ];
 
     return (
-        <section style={{ padding: '60px 0', backgroundColor: '#FFFFFF' }}>
-            <div className="container" style={{ maxWidth: '1280px', display: 'flex', flexWrap: 'wrap', gap: '60px' }}>
+        <section style={{
+            padding: '80px 0',
+            background: 'linear-gradient(180deg, #F8FAFC 0%, #F0F9FF 50%, #FFFFFF 100%)',
+            position: 'relative',
+            overflow: 'hidden'
+        }}>
+            {/* Background decoration */}
+            <div style={{
+                position: 'absolute',
+                top: '20%',
+                right: '-5%',
+                width: '400px',
+                height: '400px',
+                background: 'radial-gradient(circle, rgba(14, 165, 233, 0.06) 0%, transparent 70%)',
+                borderRadius: '50%',
+                pointerEvents: 'none'
+            }} />
+
+            <div className="container" style={{
+                maxWidth: '1200px',
+                margin: '0 auto',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 'clamp(40px, 6vw, 80px)'
+            }}>
                 {/* Left Column: Headline */}
-                <div style={{ flex: '1', minWidth: '300px' }}>
+                <div style={{
+                    flex: '1 1 300px',
+                    minWidth: '280px'
+                }}>
                     <div style={{ position: 'sticky', top: '120px' }}>
                         <h2 style={{
-                            fontSize: '48px',
+                            fontSize: 'clamp(28px, 5vw, 44px)',
                             fontWeight: 700,
-                            color: '#111827',
-                            lineHeight: '1.2',
+                            color: '#0F172A',
+                            lineHeight: '1.15',
                             letterSpacing: '-0.02em',
-                            maxWidth: '400px'
+                            maxWidth: '380px',
+                            fontFamily: '"Inter", sans-serif'
                         }}>
                             What Powers Every AI Phone Call
                         </h2>
+                        <p style={{
+                            fontSize: 'clamp(15px, 2vw, 17px)',
+                            color: '#64748B',
+                            lineHeight: 1.6,
+                            marginTop: '20px',
+                            maxWidth: '360px'
+                        }}>
+                            Built with cutting-edge technology for natural, intelligent conversations.
+                        </p>
                     </div>
                 </div>
 
                 {/* Right Column: Timeline */}
-                <div style={{ flex: '1.5', minWidth: '300px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+                <div style={{ flex: '1.5 1 320px', minWidth: '300px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 3vw, 32px)' }}>
                         {steps.map((step, index) => (
-                            <div key={index} style={{ display: 'flex', gap: '32px', position: 'relative' }}>
-                                {/* Timeline Connector Line */}
-                                {index !== steps.length - 1 && (
-                                    <div style={{
-                                        position: 'absolute',
-                                        left: '28px', // Center of the 56px circle
-                                        top: '56px',
-                                        bottom: '-48px', // Reach to the next item
-                                        width: '2px',
-                                        borderLeft: '2px dotted #E5E7EB',
-                                        zIndex: 0
-                                    }} />
-                                )}
-
+                            <div key={index} style={{
+                                display: 'flex',
+                                gap: 'clamp(16px, 3vw, 28px)',
+                                position: 'relative',
+                                padding: 'clamp(16px, 3vw, 24px)',
+                                background: '#FFFFFF',
+                                borderRadius: '20px',
+                                border: '1px solid #E2E8F0',
+                                transition: 'all 0.3s ease',
+                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)'
+                            }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.borderColor = '#BAE6FD';
+                                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(14, 165, 233, 0.1)';
+                                    e.currentTarget.style.transform = 'translateX(4px)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.borderColor = '#E2E8F0';
+                                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.02)';
+                                    e.currentTarget.style.transform = 'translateX(0)';
+                                }}
+                            >
                                 {/* Number Circle */}
                                 <div style={{
-                                    width: '56px',
-                                    height: '56px',
-                                    borderRadius: '50%',
-                                    backgroundColor: '#1E40AF', // Deep Blue
+                                    width: 'clamp(44px, 6vw, 52px)',
+                                    height: 'clamp(44px, 6vw, 52px)',
+                                    borderRadius: '14px',
+                                    background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                                     color: '#FFFFFF',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    fontSize: '18px',
+                                    fontSize: 'clamp(14px, 2vw, 16px)',
                                     fontWeight: 700,
                                     flexShrink: 0,
-                                    zIndex: 1,
-                                    position: 'relative',
-                                    boxShadow: '0 4px 6px -1px rgba(30, 64, 175, 0.3)'
+                                    boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)'
                                 }}>
                                     {step.number}
                                 </div>
 
                                 {/* Content */}
-                                <div style={{ paddingTop: '8px' }}>
+                                <div>
                                     <h3 style={{
-                                        fontSize: '24px',
+                                        fontSize: 'clamp(16px, 2.5vw, 20px)',
                                         fontWeight: 600,
-                                        color: '#111827',
-                                        marginBottom: '12px',
+                                        color: '#0F172A',
+                                        marginBottom: '8px',
                                         lineHeight: '1.3'
                                     }}>
                                         {step.title}
                                     </h3>
                                     <p style={{
-                                        fontSize: '16px',
-                                        color: '#6B7280', // Grey 500
-                                        lineHeight: '1.6'
+                                        fontSize: 'clamp(13px, 1.8vw, 15px)',
+                                        color: '#64748B',
+                                        lineHeight: '1.6',
+                                        margin: 0
                                     }}>
                                         {step.description}
                                     </p>

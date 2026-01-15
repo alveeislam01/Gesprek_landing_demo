@@ -2,69 +2,115 @@ import React from 'react';
 import { Twitter, Linkedin, Github, Globe } from 'lucide-react';
 
 const Footer: React.FC = () => {
+    const linkStyle: React.CSSProperties = {
+        fontSize: '14px',
+        color: '#64748B',
+        textDecoration: 'none',
+        transition: 'color 0.2s ease'
+    };
+
+    const socialStyle: React.CSSProperties = {
+        color: '#94A3B8',
+        transition: 'color 0.2s ease',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '36px',
+        height: '36px',
+        borderRadius: '10px',
+        background: 'rgba(14, 165, 233, 0.05)',
+        border: '1px solid rgba(14, 165, 233, 0.1)'
+    };
+
     return (
-        <footer style={{ backgroundColor: '#F9FAFB', padding: '80px 0 40px', borderTop: '1px solid #E5E7EB' }}>
-            <div className="container" style={{ maxWidth: '1280px' }}>
+        <footer style={{
+            background: 'linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%)',
+            padding: 'clamp(48px, 8vw, 80px) 0 clamp(24px, 4vw, 40px)',
+            borderTop: '1px solid #E2E8F0'
+        }}>
+            <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '48px',
-                    marginBottom: '64px'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                    gap: 'clamp(32px, 5vw, 60px)',
+                    marginBottom: 'clamp(40px, 6vw, 60px)'
                 }}>
                     {/* Brand Column */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '300px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <div style={{ width: '24px', height: '24px', background: '#050505', borderRadius: '50%' }}></div>
-                            <span style={{ fontWeight: 700, fontSize: '18px', color: '#111827', letterSpacing: '-0.02em' }}>Gesprek.ai</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', gridColumn: 'span 1' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <div style={{
+                                width: '32px',
+                                height: '32px',
+                                background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <span style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '16px' }}>G</span>
+                            </div>
+                            <span style={{ fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 20px)', color: '#0F172A', letterSpacing: '-0.02em' }}>Gesprek.ai</span>
                         </div>
-                        <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '1.6' }}>
+                        <p style={{ fontSize: 'clamp(13px, 1.8vw, 14px)', color: '#64748B', lineHeight: '1.7', maxWidth: '260px' }}>
                             Human-like AI phone agents that handle calls, qualify leads, and schedule appointments 24/7.
                         </p>
-                        <div style={{ display: 'flex', gap: '16px' }}>
-                            <a href="#" style={{ color: '#9CA3AF', transition: 'color 0.2s' }} aria-label="Twitter">
-                                <Twitter size={20} />
+                        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                            <a href="#" style={socialStyle} aria-label="Twitter"
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.05)'}
+                            >
+                                <Twitter size={18} />
                             </a>
-                            <a href="#" style={{ color: '#9CA3AF', transition: 'color 0.2s' }} aria-label="LinkedIn">
-                                <Linkedin size={20} />
+                            <a href="#" style={socialStyle} aria-label="LinkedIn"
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.05)'}
+                            >
+                                <Linkedin size={18} />
                             </a>
-                            <a href="#" style={{ color: '#9CA3AF', transition: 'color 0.2s' }} aria-label="GitHub">
-                                <Github size={20} />
+                            <a href="#" style={socialStyle} aria-label="GitHub"
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.05)'}
+                            >
+                                <Github size={18} />
                             </a>
-                            <a href="#" style={{ color: '#9CA3AF', transition: 'color 0.2s' }} aria-label="Website">
-                                <Globe size={20} />
+                            <a href="#" style={socialStyle} aria-label="Website"
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)'}
+                                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.05)'}
+                            >
+                                <Globe size={18} />
                             </a>
                         </div>
                     </div>
 
                     {/* Links Columns */}
                     <div>
-                        <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#111827', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Product</h4>
+                        <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#0EA5E9', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Product</h4>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Features</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Integrations</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Pricing</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Changelog</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Docs</a></li>
+                            <li><a href="#" style={linkStyle}>Features</a></li>
+                            <li><a href="#" style={linkStyle}>Integrations</a></li>
+                            <li><a href="#" style={linkStyle}>Pricing</a></li>
+                            <li><a href="#" style={linkStyle}>Changelog</a></li>
+                            <li><a href="#" style={linkStyle}>Docs</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#111827', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Company</h4>
+                        <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#0EA5E9', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Company</h4>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>About</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Blog</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Careers</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Customers</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Brand</a></li>
+                            <li><a href="#" style={linkStyle}>About</a></li>
+                            <li><a href="#" style={linkStyle}>Blog</a></li>
+                            <li><a href="#" style={linkStyle}>Careers</a></li>
+                            <li><a href="#" style={linkStyle}>Customers</a></li>
+                            <li><a href="#" style={linkStyle}>Brand</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#111827', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Legal</h4>
+                        <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#0EA5E9', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Legal</h4>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Privacy Policy</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Terms of Service</a></li>
-                            <li><a href="#" style={{ fontSize: '14px', color: '#4B5563', textDecoration: 'none' }}>Security</a></li>
+                            <li><a href="#" style={linkStyle}>Privacy Policy</a></li>
+                            <li><a href="#" style={linkStyle}>Terms of Service</a></li>
+                            <li><a href="#" style={linkStyle}>Security</a></li>
                         </ul>
                     </div>
                 </div>
@@ -75,16 +121,26 @@ const Footer: React.FC = () => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    paddingTop: '32px',
-                    borderTop: '1px solid #E5E7EB',
+                    paddingTop: '28px',
+                    borderTop: '1px solid #E2E8F0',
                     flexWrap: 'wrap',
                     gap: '16px'
                 }}>
-                    <p style={{ fontSize: '14px', color: '#9CA3AF' }}>
+                    <p style={{ fontSize: 'clamp(12px, 1.5vw, 13px)', color: '#94A3B8', margin: 0 }}>
                         © {new Date().getFullYear()} Gesprek.ai Inc. All rights reserved.
                     </p>
-                    <div style={{ display: 'flex', gap: '24px' }}>
-                        <span style={{ fontSize: '14px', color: '#9CA3AF', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                        <span style={{
+                            fontSize: 'clamp(12px, 1.5vw, 13px)',
+                            color: '#64748B',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            background: 'rgba(16, 185, 129, 0.1)',
+                            padding: '6px 14px',
+                            borderRadius: '20px',
+                            border: '1px solid rgba(16, 185, 129, 0.2)'
+                        }}>
                             <span style={{ width: '8px', height: '8px', background: '#10B981', borderRadius: '50%' }}></span>
                             All systems operational
                         </span>

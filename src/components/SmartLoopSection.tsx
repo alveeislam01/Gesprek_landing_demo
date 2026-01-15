@@ -1,86 +1,133 @@
 import React from 'react';
-import { Infinity, ChevronRight } from 'lucide-react';
+import { Infinity as InfinityIcon, ChevronRight } from 'lucide-react';
 
 const SmartLoopSection: React.FC = () => {
     return (
-        <section style={{ padding: '40px 0', backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
+        <section style={{
+            padding: 'clamp(48px, 8vw, 80px) 0',
+            background: 'linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 50%, #FFFFFF 100%)',
+            overflow: 'hidden',
+            position: 'relative'
+        }}>
+            {/* Background decoration */}
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '800px',
+                height: '800px',
+                background: 'radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%)',
+                borderRadius: '50%',
+                pointerEvents: 'none'
+            }} />
+
             <div className="container" style={{
                 maxWidth: '1200px',
+                margin: '0 auto',
                 display: 'flex',
                 flexDirection: 'row',
+                flexWrap: 'wrap',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '20px',
+                gap: 'clamp(32px, 5vw, 40px)',
                 position: 'relative'
             }}>
                 {/* Left Side: Text */}
-                <div style={{ flex: '0 0 35%', maxWidth: '400px', zIndex: 10 }}>
+                <div style={{ flex: '1 1 280px', minWidth: '260px', zIndex: 10, padding: '0 16px' }}>
                     <h2 style={{
-                        fontSize: '48px',
+                        fontSize: 'clamp(28px, 5vw, 44px)',
                         fontWeight: 700,
-                        color: '#111827',
-                        lineHeight: '1.1',
+                        color: '#0F172A',
+                        lineHeight: '1.15',
                         letterSpacing: '-0.02em',
                         fontFamily: '"Inter", sans-serif',
-                        marginBottom: '16px'
+                        marginBottom: '20px',
+                        maxWidth: '400px'
                     }}>
                         And the Loop Only Gets Smarter
                     </h2>
+                    <p style={{
+                        fontSize: 'clamp(15px, 2vw, 17px)',
+                        color: '#64748B',
+                        lineHeight: 1.6,
+                        maxWidth: '360px'
+                    }}>
+                        Every interaction makes the AI more effective at driving results.
+                    </p>
+
+                    {/* Mobile Cards - Show on smaller screens */}
+                    <div className="show-mobile" style={{ display: 'none', marginTop: '32px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            {[
+                                { title: 'Automate', desc: 'AI handles outreach — calling, qualifying, and following up.' },
+                                { title: 'Analyse', desc: 'Every call is understood for intent and logged cleanly.' },
+                                { title: 'Improve', desc: 'What works gets applied to the next call automatically.' }
+                            ].map((card, i) => (
+                                <div key={i} style={{
+                                    background: '#FFFFFF',
+                                    borderRadius: '16px',
+                                    padding: '20px',
+                                    border: '1px solid #BAE6FD',
+                                    boxShadow: '0 4px 12px rgba(14, 165, 233, 0.08)'
+                                }}>
+                                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{card.title}</h3>
+                                    <p style={{ fontSize: '14px', color: '#64748B', lineHeight: 1.5, margin: 0 }}>{card.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                {/* Right Side: Diagram */}
-                <div style={{
-                    flex: '1',
-                    height: '650px',
+                {/* Right Side: Diagram - Hide on mobile */}
+                <div className="hide-mobile" style={{
+                    flex: '1 1 400px',
+                    minHeight: '500px',
                     position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-                    {/* Diagram Wrapper - Size constrained to largest ring for easy relative positioning */}
+                    {/* Diagram Wrapper */}
                     <div style={{
                         position: 'relative',
-                        width: '650px',
-                        height: '650px',
+                        width: 'min(500px, 100%)',
+                        height: '500px',
                     }}>
-                        {/* Concentric Rings (Centered in Wrapper) */}
-
-                        {/* Inner Ring (d=280) */}
+                        {/* Concentric Rings */}
                         <div style={{
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: '280px',
-                            height: '280px',
+                            width: '220px',
+                            height: '220px',
                             borderRadius: '50%',
-                            border: '1px dashed #E5E7EB',
+                            border: '2px dashed rgba(14, 165, 233, 0.4)',
                             zIndex: 1
                         }}></div>
 
-                        {/* Middle Ring (d=460) */}
                         <div style={{
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: '460px',
-                            height: '460px',
+                            width: '350px',
+                            height: '350px',
                             borderRadius: '50%',
-                            border: '1px dashed #E5E7EB',
+                            border: '2px dashed rgba(14, 165, 233, 0.3)',
                             zIndex: 1
                         }}></div>
 
-                        {/* Outer Ring (d=640) */}
                         <div style={{
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: '640px',
-                            height: '640px',
+                            width: '480px',
+                            height: '480px',
                             borderRadius: '50%',
-                            border: '1px dashed #E5E7EB',
+                            border: '2px dashed rgba(14, 165, 233, 0.2)',
                             zIndex: 1
                         }}></div>
 
@@ -90,139 +137,126 @@ const SmartLoopSection: React.FC = () => {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: '88px',
-                            height: '88px',
+                            width: '70px',
+                            height: '70px',
                             borderRadius: '50%',
-                            background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+                            background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.4)',
+                            boxShadow: '0 12px 28px rgba(14, 165, 233, 0.35)',
                             zIndex: 10
                         }}>
-                            <Infinity size={44} color="#FFFFFF" />
+                            <InfinityIcon size={36} color="#FFFFFF" />
                         </div>
 
-                        {/* Arrows - Positioned exactly on rings */}
-
-                        {/* Arrow 1: Top Right (Outer Ring) - 45 degrees */}
-                        {/* Outer Ring Radius = 320px, Center = 325px
-                            At 45°: x = 325 + 320*cos(45°) = 325 + 226 = 551px from left
-                                    y = 325 - 320*sin(45°) = 325 - 226 = 99px from top
-                        */}
+                        {/* Arrows on rings */}
                         <div style={{
                             position: 'absolute',
-                            top: '81px',
-                            left: '533px',
-                            width: '36px',
-                            height: '36px',
+                            top: '50px',
+                            right: '50px',
+                            width: '28px',
+                            height: '28px',
                             borderRadius: '50%',
-                            backgroundColor: '#111827',
+                            background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             zIndex: 5,
-                            transform: 'rotate(45deg)'
+                            transform: 'rotate(-45deg)',
+                            boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)'
                         }}>
-                            <ChevronRight size={18} color="#FFFFFF" strokeWidth={3} />
+                            <ChevronRight size={14} color="#FFFFFF" strokeWidth={3} />
                         </div>
 
-                        {/* Arrow 2: Bottom (Outer Ring) - 270 degrees (6 o'clock) */}
-                        {/* At 270°: x = center, y = 325 + 320 = 645px from top */}
                         <div style={{
                             position: 'absolute',
-                            top: '627px',
+                            bottom: '8px',
                             left: '50%',
-                            transform: 'translateX(-50%) rotate(90deg)',
-                            width: '36px',
-                            height: '36px',
+                            width: '28px',
+                            height: '28px',
                             borderRadius: '50%',
-                            backgroundColor: '#111827',
+                            background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            zIndex: 5
+                            zIndex: 5,
+                            transform: 'translateX(-50%) rotate(180deg)',
+                            boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)'
                         }}>
-                            <ChevronRight size={18} color="#FFFFFF" strokeWidth={3} />
+                            <ChevronRight size={14} color="#FFFFFF" strokeWidth={3} />
                         </div>
 
-                        {/* Arrow 3: Left (Middle Ring) - 180 degrees (9 o'clock) */}
-                        {/* Middle Ring Radius = 230px
-                            At 180°: x = 325 - 230 = 95px from left, y = center
-                        */}
                         <div style={{
                             position: 'absolute',
                             top: '50%',
-                            left: '77px',
-                            transform: 'translateY(-50%) rotate(180deg)',
-                            width: '36px',
-                            height: '36px',
+                            left: '50px',
+                            width: '28px',
+                            height: '28px',
                             borderRadius: '50%',
-                            backgroundColor: '#111827',
+                            background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            zIndex: 5
+                            zIndex: 5,
+                            transform: 'translateY(-50%) rotate(90deg)',
+                            boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)'
                         }}>
-                            <ChevronRight size={18} color="#FFFFFF" strokeWidth={3} />
+                            <ChevronRight size={14} color="#FFFFFF" strokeWidth={3} />
                         </div>
 
-                        {/* Cards - Positioned relative to wrapper */}
-
-                        {/* Automate - Top Left */}
+                        {/* Cards */}
                         <div style={{
                             position: 'absolute',
-                            top: '40px',
-                            left: '0px',
-                            width: '240px',
+                            top: '20px',
+                            left: '0',
+                            width: '180px',
                             backgroundColor: '#FFFFFF',
-                            borderRadius: '20px',
-                            padding: '24px',
-                            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.08)',
-                            border: '1px solid #F3F4F6',
+                            borderRadius: '14px',
+                            padding: '16px',
+                            boxShadow: '0 8px 24px rgba(14, 165, 233, 0.1)',
+                            border: '1px solid #BAE6FD',
                             zIndex: 20
                         }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#111827', marginBottom: '8px' }}>Automate</h3>
-                            <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '1.6' }}>
-                                AI handles the outreach — calling instantly, qualifying interest, and sending follow-ups.
+                            <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#0F172A', marginBottom: '6px' }}>Automate</h3>
+                            <p style={{ fontSize: '12px', color: '#64748B', lineHeight: '1.4', margin: 0 }}>
+                                AI handles outreach — calling, qualifying, and following up.
                             </p>
                         </div>
 
-                        {/* Analyse - Right */}
                         <div style={{
                             position: 'absolute',
                             top: '50%',
-                            right: '-20px',
+                            right: '0',
                             transform: 'translateY(-50%)',
-                            width: '240px',
+                            width: '180px',
                             backgroundColor: '#FFFFFF',
-                            borderRadius: '20px',
-                            padding: '24px',
-                            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.08)',
-                            border: '1px solid #F3F4F6',
+                            borderRadius: '14px',
+                            padding: '16px',
+                            boxShadow: '0 8px 24px rgba(14, 165, 233, 0.1)',
+                            border: '1px solid #BAE6FD',
                             zIndex: 20
                         }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#111827', marginBottom: '8px' }}>Analyse</h3>
-                            <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '1.6' }}>
-                                Every call is understood for intent and outcomes, then logged cleanly.
+                            <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#0F172A', marginBottom: '6px' }}>Analyse</h3>
+                            <p style={{ fontSize: '12px', color: '#64748B', lineHeight: '1.4', margin: 0 }}>
+                                Every call is understood for intent and logged cleanly.
                             </p>
                         </div>
 
-                        {/* Improve - Bottom Left */}
                         <div style={{
                             position: 'absolute',
-                            bottom: '60px',
-                            left: '40px',
-                            width: '240px',
+                            bottom: '40px',
+                            left: '20px',
+                            width: '180px',
                             backgroundColor: '#FFFFFF',
-                            borderRadius: '20px',
-                            padding: '24px',
-                            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.08)',
-                            border: '1px solid #F3F4F6',
+                            borderRadius: '14px',
+                            padding: '16px',
+                            boxShadow: '0 8px 24px rgba(14, 165, 233, 0.1)',
+                            border: '1px solid #BAE6FD',
                             zIndex: 20
                         }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#111827', marginBottom: '8px' }}>Improve</h3>
-                            <p style={{ fontSize: '14px', color: '#6B7280', lineHeight: '1.6' }}>
+                            <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#0F172A', marginBottom: '6px' }}>Improve</h3>
+                            <p style={{ fontSize: '12px', color: '#64748B', lineHeight: '1.4', margin: 0 }}>
                                 What works gets applied to the next call automatically.
                             </p>
                         </div>

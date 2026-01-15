@@ -1,5 +1,6 @@
-/* Global Design System */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   /* Colors - Clean Light Mode Palette */
@@ -62,4 +63,125 @@ button {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+
+/* Responsive grid classes */
+.responsive-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Responsive flex */
+.responsive-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Hide on mobile */
+.hide-mobile {
+  display: block;
+}
+
+.show-mobile {
+  display: none;
+}
+
+/* ===== TABLET BREAKPOINT (max-width: 1024px) ===== */
+@media (max-width: 1024px) {
+  .responsive-grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* ===== MOBILE BREAKPOINT (max-width: 768px) ===== */
+@media (max-width: 768px) {
+  .responsive-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .responsive-grid-3,
+  .responsive-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+
+  /* Section padding adjustments */
+  section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  /* Typography scaling */
+  h1 {
+    font-size: 32px !important;
+  }
+
+  h2 {
+    font-size: 28px !important;
+  }
+
+  h3 {
+    font-size: 18px !important;
+  }
+}
+
+/* ===== SMALL MOBILE BREAKPOINT (max-width: 480px) ===== */
+@media (max-width: 480px) {
+  .responsive-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+
+  h1 {
+    font-size: 28px !important;
+  }
+
+  h2 {
+    font-size: 24px !important;
+  }
 }

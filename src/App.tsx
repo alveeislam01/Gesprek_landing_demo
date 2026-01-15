@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
+import ComparisonSection from './components/ComparisonSection';
 import Capabilities from './components/Capabilities';
 import PowerSection from './components/PowerSection';
 import AfterCallSection from './components/AfterCallSection';
@@ -21,6 +22,10 @@ function App() {
 
       <FadeInSection delay={200}>
         <Stats />
+      </FadeInSection>
+
+      <FadeInSection delay={200}>
+        <ComparisonSection />
       </FadeInSection>
 
       <FadeInSection delay={200}>
