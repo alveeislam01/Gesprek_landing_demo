@@ -1,0 +1,72 @@
+/* Dark Theme Override for react-day-picker */
+.rdp {
+    --rdp-cell-size: 40px;
+    --rdp-accent-color: #6EF5B2;
+    --rdp-background-color: rgba(110, 245, 178, 0.1);
+    --rdp-accent-color-dark: #5EE3A4;
+    --rdp-background-color-dark: #6EF5B2;
+    --rdp-outline: 2px solid var(--rdp-accent-color);
+    --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
+    margin: 0;
+}
+
+.rdp-caption_label {
+    font-family: "Outfit", sans-serif;
+    color: #F5F7FA;
+    font-weight: 600;
+}
+
+.rdp-button_reset {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9CA3AF;
+}
+
+.rdp-button_reset:hover {
+    color: #F5F7FA;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.rdp-head_cell {
+    color: #6B7280;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.rdp-day {
+    color: #E6E8EB;
+    font-family: "Outfit", sans-serif;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.rdp-day:hover:not(.rdp-day_selected) {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.rdp-day_selected {
+    background-color: #6EF5B2;
+    color: #0B0D10;
+    font-weight: 600;
+}
+
+.rdp-day_selected:hover {
+    background-color: #5EE3A4;
+    color: #0B0D10;
+}
+
+.rdp-day_today {
+    border: 1px solid rgba(110, 245, 178, 0.4);
+}
+
+.rdp-nav_button {
+    color: #9CA3AF;
+}
+
+.rdp-nav_button:hover {
+    color: #F5F7FA;
+    background-color: rgba(255, 255, 255, 0.1);
+}

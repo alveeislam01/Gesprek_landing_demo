@@ -1,106 +1,204 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const Stats: React.FC = () => {
+const Stats = () => {
     const stats = [
-        { value: '90%', label: 'Call Automation' },
-        { value: '90%', label: 'Lower Manpower' },
-        { value: '50%', label: 'Error Reduction' },
-        { value: '60%', label: 'Cost Savings' },
-        { value: '60%', label: 'Qualified Leads' },
-        { value: '10X', label: 'Conversions' },
+        { value: '90%', label: 'Call Automation', color: '#4ECDC4' },
+        { value: '90%', label: 'Reduced Manpower', color: '#45B7D1' },
+        { value: '50%', label: 'Fewer Errors', color: '#F38181' },
+        { value: '60%', label: 'Cost Reduction', color: '#F7DC6F' },
+        { value: '60%', label: 'More Qualified Leads', color: '#BB8FCE' },
+        { value: '10X', label: 'Higher Conversions', color: '#6EF7B3' },
     ];
 
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section style={{
-            padding: '80px 20px',
-            background: 'linear-gradient(180deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%)',
-            position: 'relative',
-            overflow: 'hidden'
-        }}>
-            {/* Sky blue background decoration */}
+        <section
+            ref={sectionRef}
+            style={{
+                position: 'relative',
+                background: '#0B0D10',
+                padding: '120px 24px',
+                overflow: 'hidden',
+                fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+            }}
+        >
+            {/* Subtle Dotted Grid Background */}
             <div style={{
                 position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '1400px',
-                height: '1400px',
-                background: 'radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%)',
-                pointerEvents: 'none'
+                top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: 'radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)',
+                backgroundSize: '24px 24px',
+                opacity: 0.05,
+                pointerEvents: 'none',
             }} />
 
-            <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', padding: '0 24px' }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+                {/* Section Header */}
                 <div style={{ textAlign: 'center', marginBottom: '56px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(28px, 5vw, 44px)',
+                        fontSize: 'clamp(32px, 4vw, 48px)',
                         fontWeight: 700,
-                        color: '#0F172A',
-                        marginBottom: '16px',
+                        color: '#F5F7FA',
                         letterSpacing: '-0.02em',
-                        lineHeight: '1.2',
-                        fontFamily: '"Inter", sans-serif'
+                        marginBottom: '16px',
+                        lineHeight: 1.15,
+                        fontFamily: '"Inter", sans-serif',
+                        background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.8) 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
                     }}>
-                        Fast-Track Business Success with AI Phone Calls
+                        Fast-Track Business Success<br />with AI Phone Calls
                     </h2>
-
                     <p style={{
-                        fontSize: 'clamp(16px, 2vw, 18px)',
-                        color: '#64748B',
+                        fontSize: 'clamp(16px, 1.5vw, 18px)',
+                        color: 'rgba(255, 255, 255, 0.55)',
                         fontWeight: 400,
-                        maxWidth: '600px',
+                        maxWidth: '560px',
                         margin: '0 auto',
-                        lineHeight: 1.6
+                        lineHeight: 1.6,
                     }}>
-                        Proven results that drive real business impact
+                        Proven results that drive real business impact — scalable, efficient, and cost-effective.
                     </p>
                 </div>
 
-                <div className="responsive-grid-6" style={{
-                    maxWidth: '1100px',
-                    margin: '0 auto'
-                }}>
+                {/* Stats Strip */}
+                <style>{`
+                    .stats-strip {
+                        display: grid;
+                        grid-template-columns: repeat(6, 1fr);
+                        border: 1px solid rgba(255, 255, 255, 0.06);
+                        border-radius: 20px;
+                        background: linear-gradient(145deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.008) 100%);
+                        backdrop-filter: blur(8px);
+                        overflow: hidden;
+                    }
+
+                    @media (max-width: 1024px) {
+                        .stats-strip { grid-template-columns: repeat(3, 1fr) !important; }
+                    }
+                    @media (max-width: 640px) {
+                        .stats-strip { 
+                            grid-template-columns: 1fr !important;
+                            border-radius: 16px; 
+                        }
+                    }
+
+                    .stat-item {
+                        padding: 36px 20px;
+                        text-align: center;
+                        position: relative;
+                        opacity: 0;
+                        transform: translateY(20px);
+                        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    }
+
+                    .stat-item.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+
+                    /* Vertical dividers */
+                    .stat-item:not(:last-child)::after {
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        top: 20%;
+                        height: 60%;
+                        width: 1px;
+                        background: rgba(255, 255, 255, 0.06);
+                    }
+
+                    /* Remove right border on last item of each row on smaller screens */
+                    @media (max-width: 1024px) {
+                        .stat-item:nth-child(3n)::after { display: none; }
+                    }
+                    @media (max-width: 640px) {
+                        .stat-item::after { display: none; } /* Remove all vertical dividers on mobile */
+                        .stat-item { border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+                        .stat-item:last-child { border-bottom: none; }
+                    }
+
+                    .stat-item:hover {
+                        background: rgba(255, 255, 255, 0.03);
+                    }
+
+                    .stat-item:hover .stat-val {
+                        transform: scale(1.05);
+                    }
+
+                    .stat-val {
+                        font-size: clamp(32px, 3vw, 40px);
+                        font-weight: 800;
+                        color: #FFFFFF;
+                        letter-spacing: -0.04em;
+                        line-height: 1;
+                        margin-bottom: 8px;
+                        font-family: 'Inter', sans-serif;
+                        transition: transform 0.3s ease;
+                    }
+
+                    .stat-lbl {
+                        font-size: 11px;
+                        font-weight: 600;
+                        color: rgba(255, 255, 255, 0.45);
+                        letter-spacing: 0.14em;
+                        text-transform: uppercase;
+                        line-height: 1.4;
+                        font-family: 'Inter', sans-serif;
+                    }
+
+                    .stat-dot {
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        margin: 0 auto 14px;
+                        opacity: 0.7;
+                        transition: opacity 0.3s ease, box-shadow 0.3s ease;
+                    }
+
+                    .stat-item:hover .stat-dot {
+                        opacity: 1;
+                    }
+                `}</style>
+
+                <div className="stats-strip">
                     {stats.map((stat, index) => (
-                        <div key={index} style={{
-                            textAlign: 'center',
-                            padding: 'clamp(20px, 3vw, 32px) 16px',
-                            background: 'rgba(255, 255, 255, 0.8)',
-                            backdropFilter: 'blur(12px)',
-                            borderRadius: '20px',
-                            border: '1px solid rgba(186, 230, 253, 0.6)',
-                            transition: 'all 0.3s ease',
-                            cursor: 'default',
-                            boxShadow: '0 4px 16px rgba(14, 165, 233, 0.06)'
-                        }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-6px)';
-                                e.currentTarget.style.boxShadow = '0 16px 32px rgba(14, 165, 233, 0.15)';
-                                e.currentTarget.style.borderColor = '#0EA5E9';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(14, 165, 233, 0.06)';
-                                e.currentTarget.style.borderColor = 'rgba(186, 230, 253, 0.6)';
-                            }}>
-                            <div style={{
-                                fontSize: 'clamp(32px, 5vw, 48px)',
-                                fontWeight: 700,
-                                background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
-                                marginBottom: '8px',
-                                lineHeight: '1',
-                                letterSpacing: '-0.02em'
-                            }}>
+                        <div
+                            key={index}
+                            className={`stat-item ${isVisible ? 'visible' : ''}`}
+                            style={{ transitionDelay: `${index * 80}ms` }}
+                        >
+                            <div
+                                className="stat-dot"
+                                style={{
+                                    background: stat.color,
+                                    boxShadow: `0 0 12px ${stat.color}40`,
+                                }}
+                            />
+                            <div className="stat-val">
                                 {stat.value}
                             </div>
-                            <div style={{
-                                fontSize: 'clamp(11px, 1.5vw, 13px)',
-                                color: '#64748B',
-                                lineHeight: '1.4',
-                                fontWeight: 500,
-                                letterSpacing: '0.01em'
-                            }}>
+                            <div className="stat-lbl">
                                 {stat.label}
                             </div>
                         </div>

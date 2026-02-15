@@ -4,7 +4,7 @@ import { Twitter, Linkedin, Github, Globe } from 'lucide-react';
 const Footer: React.FC = () => {
     const linkStyle: React.CSSProperties = {
         fontSize: '14px',
-        color: '#64748B',
+        color: '#94A3B8',
         textDecoration: 'none',
         transition: 'color 0.2s ease'
     };
@@ -24,9 +24,9 @@ const Footer: React.FC = () => {
 
     return (
         <footer style={{
-            background: 'linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%)',
+            background: '#0B0D10',
             padding: 'clamp(48px, 8vw, 80px) 0 clamp(24px, 4vw, 40px)',
-            borderTop: '1px solid #E2E8F0'
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)'
         }}>
             <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <div style={{
@@ -49,9 +49,9 @@ const Footer: React.FC = () => {
                             }}>
                                 <span style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '16px' }}>G</span>
                             </div>
-                            <span style={{ fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 20px)', color: '#0F172A', letterSpacing: '-0.02em' }}>Gesprek.ai</span>
+                            <span style={{ fontWeight: 700, fontSize: 'clamp(18px, 2.5vw, 20px)', color: '#F5F7FA', letterSpacing: '-0.02em' }}>Gesprek.ai</span>
                         </div>
-                        <p style={{ fontSize: 'clamp(13px, 1.8vw, 14px)', color: '#64748B', lineHeight: '1.7', maxWidth: '260px' }}>
+                        <p style={{ fontSize: 'clamp(13px, 1.8vw, 14px)', color: '#94A3B8', lineHeight: '1.7', maxWidth: '260px' }}>
                             Human-like AI phone agents that handle calls, qualify leads, and schedule appointments 24/7.
                         </p>
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
                         <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#0EA5E9', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Product</h4>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             <li><a href="#" style={linkStyle}>Features</a></li>
-                            <li><a href="#" style={linkStyle}>Integrations</a></li>
+                            <li><a href="#integration" style={linkStyle}>Integrations</a></li>
                             <li><a href="#" style={linkStyle}>Pricing</a></li>
                             <li><a href="#" style={linkStyle}>Changelog</a></li>
                             <li><a href="#" style={linkStyle}>Docs</a></li>
@@ -122,10 +122,10 @@ const Footer: React.FC = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     paddingTop: '28px',
-                    borderTop: '1px solid #E2E8F0',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
                     flexWrap: 'wrap',
                     gap: '16px'
-                }}>
+                }} className="footer-bottom">
                     <p style={{ fontSize: 'clamp(12px, 1.5vw, 13px)', color: '#94A3B8', margin: 0 }}>
                         © {new Date().getFullYear()} Gesprek.ai Inc. All rights reserved.
                     </p>
@@ -147,6 +147,29 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <style>{`
+                @media (max-width: 768px) {
+                    .container > div:first-child {
+                        text-align: center;
+                        justify-items: center;
+                    }
+                    .container > div:first-child > div:first-child { /* Brand column */
+                        align-items: center;
+                        margin-bottom: 24px;
+                        grid-column: span 2; /* Make brand span full width if using 2 columns */
+                    }
+                    /* Ensure grid lines up for mobile links */
+                    .container > div:first-child { /* Main grid */
+                        grid-template-columns: 1fr;
+                        gap: 40px !important;
+                    }
+                    .footer-bottom {
+                        flex-direction: column;
+                        text-align: center;
+                        gap: 20px;
+                    }
+                }
+            `}</style>
         </footer>
     );
 };

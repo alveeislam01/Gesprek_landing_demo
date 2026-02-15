@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../index.css';
+import logo from '../assets/logo.svg';
 
-const Header: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false);
+interface HeaderProps {
+  onOpenDemo?: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onOpenDemo }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}
       style={{
         position: 'fixed',
         top: 0,
@@ -23,43 +18,104 @@ const Header: React.FC = () => {
         right: 0,
         width: '100%',
         zIndex: 9999,
-        height: 'var(--header-height)',
+        height: '72px',
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : '#FFFFFF',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: scrolled ? '1px solid rgba(229, 231, 235, 0.5)' : '1px solid transparent',
-        boxShadow: scrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.05)' : 'none'
+        background: 'linear-gradient(180deg, #0B0C10 0%, #0A0B0F 100%)',
       }}
     >
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        .header-nav-link {
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.7);
+          transition: color 0.2s ease;
+          text-decoration: none;
+        }
+        .header-nav-link:hover {
+          color: #F5F7FA;
+        }
+
+        .header-cta {
+          background: #6EF5B2;
+          color: #0B0D10;
+          padding: 10px 20px;
+          border-radius: 999px;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          border: none;
+          cursor: pointer;
+          transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .header-cta:hover {
+          background: #5EE3A4;
+          transform: translateY(-1px);
+        }
+
+        @media (min-width: 1025px) {
+          .desktop-nav { display: flex !important; gap: 32px; align-items: center; }
+          .mobile-toggle { display: none !important; }
+        }
+        @media (max-width: 1024px) {
+          .desktop-nav { display: none !important; }
+          .mobile-toggle { display: block !important; }
+        }
+
+        .mobile-menu {
+          position: absolute;
+          top: 72px;
+          left: 0;
+          right: 0;
+          background: #0B0D10;
+          padding: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+        .mobile-menu a {
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+        }
+        .mobile-menu a:hover {
+          color: #F5F7FA;
+        }
+      `}</style>
+
+      <div className="container" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 24px',
+        width: '100%'
+      }}>
         {/* Logo */}
-        <div className="logo" style={{ fontWeight: 700, fontSize: '18px', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '8px', color: '#050505' }}>
-          <div style={{ width: '24px', height: '24px', background: '#050505', borderRadius: '50%' }}></div>
-          <span>Gesprek.ai</span>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          color: '#F5F7FA'
+        }}>
+          <img src={logo} alt="Gesprek" style={{ height: '32px' }} />
         </div>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav" style={{ display: 'none' }}>
-          <style>{`
-            @media (min-width: 768px) {
-              .desktop-nav { display: flex !important; gap: 32px; align-items: center; }
-              .mobile-toggle { display: none !important; }
-            }
-          `}</style>
-          {['Solutions', 'Integrations', 'Resources'].map((item) => (
+          {['Solution', 'Integration', 'Resources'].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              style={{
-                fontSize: '14px',
-                color: '#4B5563', // Grey 600
-                fontWeight: 500,
-                transition: 'color 0.2s ease'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#050505'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#4B5563'}
+              className="header-nav-link"
             >
               {item}
             </a>
@@ -68,36 +124,22 @@ const Header: React.FC = () => {
 
         {/* Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <a
-            href="#signin"
-            className="desktop-nav"
-            style={{
-              fontSize: '14px',
-              color: '#050505',
-              fontWeight: 500
-            }}
-          >
-            Sign in
-          </a>
           <button
-            style={{
-              padding: '8px 16px',
-              backgroundColor: '#050505',
-              color: 'white',
-              fontSize: '14px',
-              fontWeight: 600,
-              borderRadius: '99px',
-              transition: 'transform 0.1s ease, box-shadow 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'none';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            className="header-cta desktop-nav"
+            onClick={onOpenDemo}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
           >
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="1.5" fill="black" />
+              <circle cx="7.5" cy="2" r="1.5" fill="black" />
+              <circle cx="13" cy="2" r="1.5" fill="black" />
+              <circle cx="2" cy="7.5" r="1.5" fill="black" />
+              <circle cx="7.5" cy="7.5" r="1.5" fill="black" />
+              <circle cx="13" cy="7.5" r="1.5" fill="black" />
+              <circle cx="2" cy="13" r="1.5" fill="black" />
+              <circle cx="7.5" cy="13" r="1.5" fill="black" />
+              <circle cx="13" cy="13" r="1.5" fill="black" />
+            </svg>
             Book Demo
           </button>
 
@@ -105,7 +147,14 @@ const Header: React.FC = () => {
           <button
             className="mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ color: '#050505', fontSize: '24px' }}
+            style={{
+              color: '#F5F7FA',
+              fontSize: '24px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'none'
+            }}
           >
             {mobileMenuOpen ? '×' : '≡'}
           </button>
@@ -113,35 +162,43 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 'var(--header-height)',
-            left: 0,
-            right: 0,
-            background: 'white',
-            padding: '24px',
-            borderBottom: '1px solid #E5E7EB',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '24px',
-            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
-          }}
-        >
-          {['Solutions', 'Integrations', 'Resources', 'Sign in'].map((item) => (
-            <a
-              key={item}
-              href="#"
-              style={{ fontSize: '16px', fontWeight: 500, color: '#050505' }}
-              onClick={() => setMobileMenuOpen(false)}
+      {
+        mobileMenuOpen && (
+          <div className="mobile-menu">
+            {['Solution', 'Integration', 'Resources'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+            <button
+              className="header-cta"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenDemo) onOpenDemo();
+              }}
+              style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}
             >
-              {item}
-            </a>
-          ))}
-        </div>
-      )}
-    </header>
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="2" cy="2" r="1.5" fill="black" />
+                <circle cx="7.5" cy="2" r="1.5" fill="black" />
+                <circle cx="13" cy="2" r="1.5" fill="black" />
+                <circle cx="2" cy="7.5" r="1.5" fill="black" />
+                <circle cx="7.5" cy="7.5" r="1.5" fill="black" />
+                <circle cx="13" cy="7.5" r="1.5" fill="black" />
+                <circle cx="2" cy="13" r="1.5" fill="black" />
+                <circle cx="7.5" cy="13" r="1.5" fill="black" />
+                <circle cx="13" cy="13" r="1.5" fill="black" />
+              </svg>
+              Book Demo
+            </button>
+          </div>
+        )
+      }
+    </header >
   );
 };
 
