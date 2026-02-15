@@ -128,7 +128,7 @@ const AgentsSection: React.FC = () => {
                             }}>
                                 Workflow Demo
                             </div>
-                            <h2 style={{
+                            <h2 className="agents-title" style={{
                                 fontFamily: '"Outfit", sans-serif',
                                 fontSize: '40px', // Smaller font
                                 fontWeight: '600',
@@ -140,7 +140,7 @@ const AgentsSection: React.FC = () => {
                                 AI That <br />
                                 <span style={{ color: '#9CA3AF' }}>Adapt</span>
                             </h2>
-                            <p style={{
+                            <p className="agents-description" style={{
                                 color: '#9CA3AF',
                                 fontSize: '16px',
                                 lineHeight: '1.5',
@@ -151,11 +151,12 @@ const AgentsSection: React.FC = () => {
                         </div>
 
                         {/* Navigation Tabs */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div className="agents-tabs-container" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             {categories.map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => handleTabClick(category)}
+                                    className="agents-tab-button"
                                     style={{
                                         width: '100%',
                                         padding: '16px 20px',
@@ -200,7 +201,7 @@ const AgentsSection: React.FC = () => {
                         className="agent-card-grid-internal"
                     >
                         {/* Internal Left: Agent Persona (Darker Background) */}
-                        <div style={{
+                        <div className="agent-card-internal-left" style={{
                             padding: '40px',
                             backgroundColor: 'rgba(0, 0, 0, 0.2)',
                             borderRight: '1px solid rgba(255, 255, 255, 0.05)',
@@ -282,7 +283,7 @@ const AgentsSection: React.FC = () => {
                         </div>
 
                         {/* Internal Right: Workflow Steps (Scrollable if needed, but fits) */}
-                        <div style={{
+                        <div className="agent-card-internal-right" style={{
                             padding: '40px',
                             display: 'flex',
                             flexDirection: 'column',
@@ -355,10 +356,54 @@ const AgentsSection: React.FC = () => {
             }
             .agent-card-grid-internal {
                 grid-template-columns: 1fr !important; /* Stack internal card content on iPad */
+                min-height: auto !important;
             }
-            .agent-card-grid-internal > div {
+            .agent-card-internal-left {
                 border-right: none !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            }
+          }
+          @media (max-width: 768px) {
+            #solution {
+                padding: 40px 0 !important;
+            }
+            .agents-title {
+                font-size: 32px !important;
+                text-align: center;
+            }
+            .agents-description {
+                text-align: center;
+                margin: 0 auto;
+            }
+            .agents-tabs-container {
+                flex-direction: row !important;
+                overflow-x: auto;
+                gap: 12px !important;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .agents-tabs-container::-webkit-scrollbar {
+                display: none;
+            }
+            .agents-tab-button {
+                width: auto !important;
+                flex: 1;
+                white-space: nowrap;
+                padding: 10px 14px !important;
+                font-size: 14px !important;
+                justify-content: center !important;
+            }
+            /* Hide arrow on mobile to center text better */
+            .agents-tab-button svg {
+                display: none;
+            }
+
+            .agent-card-internal-left, .agent-card-internal-right {
+                padding: 24px !important;
+            }
+            .agent-card-internal-left {
+                padding-bottom: 32px !important;
             }
           }
         `}</style>
