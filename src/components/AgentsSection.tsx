@@ -13,7 +13,7 @@ const AgentsSection: React.FC = () => {
             title: 'Healthcare Agent',
             tag: 'Medical Office',
             description: 'Handles patient intake, scheduling, and triage with HIPAA-compliant security.',
-            icon: <Stethoscope size={32} style={{ color: '#059669' }} />, // Dark green for light card
+            icon: <Stethoscope size={32} style={{ color: '#059669' }} />,
             phone: '+1 (555) 123-4567',
             steps: [
                 { icon: <PhoneIncoming size={20} />, title: 'Inbound Call', desc: 'Patient calls to schedule a check-up.' },
@@ -64,7 +64,7 @@ const AgentsSection: React.FC = () => {
                     const nextIndex = (currentIndex + 1) % categories.length;
                     return categories[nextIndex];
                 });
-            }, 8000); // 8 seconds per slide
+            }, 8000);
         }
 
         return () => {
@@ -80,16 +80,16 @@ const AgentsSection: React.FC = () => {
         <section
             id="solution"
             style={{
-                backgroundColor: '#0B0D10', // Dark Section Background
+                backgroundColor: '#0B0D10',
                 padding: '80px 0',
                 borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                color: '#ffffff', // Light Text for Section (Headers)
+                color: '#ffffff',
                 fontFamily: '"Outfit", sans-serif',
                 position: 'relative',
                 minHeight: '800px',
                 overflow: 'hidden'
             }}>
-            {/* Dot Pattern - Light dots on Dark bg */}
+            {/* Dot Pattern */}
             <div style={{
                 position: 'absolute',
                 top: 0,
@@ -102,17 +102,17 @@ const AgentsSection: React.FC = () => {
                 pointerEvents: 'none'
             }} />
 
-            <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+            <div className="container agents-container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
 
                 <div className="agents-content-wrapper" style={{
                     display: 'grid',
-                    gridTemplateColumns: 'minmax(280px, 0.4fr) 1.5fr', // Narrower left column, wider card
+                    gridTemplateColumns: 'minmax(280px, 0.4fr) 1.5fr',
                     gap: '40px',
-                    alignItems: 'center' // Center vertically
+                    alignItems: 'center'
                 }}>
                     {/* Left Column: Title & Tabs */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                        <div>
+                    <div className="agents-left-column" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                        <div className="agents-header-section">
                             <div style={{
                                 display: 'inline-block',
                                 padding: '6px 12px',
@@ -130,14 +130,14 @@ const AgentsSection: React.FC = () => {
                             </div>
                             <h2 className="agents-title" style={{
                                 fontFamily: '"Outfit", sans-serif',
-                                fontSize: '40px', // Smaller font
+                                fontSize: '40px',
                                 fontWeight: '600',
                                 marginBottom: '16px',
                                 color: '#F5F7FA',
                                 letterSpacing: '-0.03em',
                                 lineHeight: '1.1'
                             }}>
-                                AI That <br />
+                                AI That <span className="title-break"><br /></span>
                                 <span style={{ color: '#9CA3AF' }}>Adapt</span>
                             </h2>
                             <p className="agents-description" style={{
@@ -181,26 +181,26 @@ const AgentsSection: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right Column: Compact Agent Card (Internal Split) */}
+                    {/* Right Column: Agent Card */}
                     <div
                         onMouseEnter={() => setIsPaused(true)}
                         onMouseLeave={() => setIsPaused(false)}
+                        className="agent-card-container"
                         style={{
                             borderRadius: '24px',
-                            padding: '0', // Removing padding from container to use internal split
+                            padding: '0',
                             border: '1px solid rgba(255, 255, 255, 0.08)',
                             backgroundColor: 'rgba(11, 13, 16, 0.7)',
                             backdropFilter: 'blur(20px)',
                             WebkitBackdropFilter: 'blur(20px)',
                             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
                             display: 'grid',
-                            gridTemplateColumns: 'minmax(280px, 0.4fr) 0.6fr', // Internal split
-                            minHeight: '480px', // Much shorter height (was 600px+)
+                            gridTemplateColumns: 'minmax(280px, 0.4fr) 0.6fr',
+                            minHeight: '480px',
                             overflow: 'hidden'
                         }}
-                        className="agent-card-grid-internal"
                     >
-                        {/* Internal Left: Agent Persona (Darker Background) */}
+                        {/* Internal Left: Agent Persona */}
                         <div className="agent-card-internal-left" style={{
                             padding: '40px',
                             backgroundColor: 'rgba(0, 0, 0, 0.2)',
@@ -209,8 +209,8 @@ const AgentsSection: React.FC = () => {
                             flexDirection: 'column',
                             justifyContent: 'space-between'
                         }}>
-                            <div>
-                                <div style={{
+                            <div className="agent-info-wrapper">
+                                <div className="agent-icon-box" style={{
                                     width: '64px',
                                     height: '64px',
                                     borderRadius: '16px',
@@ -226,7 +226,7 @@ const AgentsSection: React.FC = () => {
                                     {React.isValidElement(currentAgent.icon) ? React.cloneElement(currentAgent.icon as React.ReactElement<any>, { size: 32 }) : currentAgent.icon}
                                 </div>
 
-                                <div className="animate-fade-in-up" key={`${activeTab}-info`}>
+                                <div className="animate-fade-in-up agent-text-content" key={`${activeTab}-info`}>
                                     <h3 style={{
                                         fontSize: '28px',
                                         fontWeight: '700',
@@ -236,7 +236,7 @@ const AgentsSection: React.FC = () => {
                                     }}>
                                         {currentAgent.title}
                                     </h3>
-                                    <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
+                                    <div className="agent-tags" style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
                                         <span style={{
                                             fontSize: '12px',
                                             color: '#9CA3AF',
@@ -260,7 +260,7 @@ const AgentsSection: React.FC = () => {
                                 </div>
                             </div>
 
-                            <button style={{
+                            <button className="demo-button" style={{
                                 marginTop: '32px',
                                 padding: '12px 24px',
                                 backgroundColor: '#6EF5B2',
@@ -282,7 +282,7 @@ const AgentsSection: React.FC = () => {
                             </button>
                         </div>
 
-                        {/* Internal Right: Workflow Steps (Scrollable if needed, but fits) */}
+                        {/* Internal Right: Workflow Steps */}
                         <div className="agent-card-internal-right" style={{
                             padding: '40px',
                             display: 'flex',
@@ -300,7 +300,7 @@ const AgentsSection: React.FC = () => {
                                 Live Call Breakdown
                             </h4>
 
-                            <div className="animate-fade-in-up" key={`${activeTab}-steps`} style={{
+                            <div className="animate-fade-in-up workflow-steps" key={`${activeTab}-steps`} style={{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 gap: '16px'
@@ -349,13 +349,15 @@ const AgentsSection: React.FC = () => {
               -ms-overflow-style: none;
               scrollbar-width: none;
           }
+          
+          /* Tablet Styles */
           @media (max-width: 1024px) {
             .agents-content-wrapper {
                 grid-template-columns: 1fr !important;
                 gap: 40px !important;
             }
-            .agent-card-grid-internal {
-                grid-template-columns: 1fr !important; /* Stack internal card content on iPad */
+            .agent-card-container {
+                grid-template-columns: 1fr !important;
                 min-height: auto !important;
             }
             .agent-card-internal-left {
@@ -363,47 +365,174 @@ const AgentsSection: React.FC = () => {
                 border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
             }
           }
+          
+          /* Mobile Styles */
           @media (max-width: 768px) {
-            #solution {
-                padding: 40px 0 !important;
+            /* Container adjustments */
+            .agents-container {
+                padding: 0 16px !important;
             }
+            
+            #solution {
+                padding: 48px 0 !important;
+                min-height: auto !important;
+            }
+            
+            /* Left column - center everything */
+            .agents-left-column {
+                gap: 24px !important;
+            }
+            
+            .agents-header-section {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .agents-header-section > div:first-child {
+                /* Workflow Demo badge */
+                margin-bottom: 12px !important;
+            }
+            
             .agents-title {
                 font-size: 32px !important;
                 text-align: center;
+                margin-bottom: 12px !important;
             }
+            
+            .agents-title .title-break {
+                display: none;
+            }
+            
             .agents-description {
                 text-align: center;
                 margin: 0 auto;
+                max-width: 100% !important;
+                padding: 0 16px;
             }
+            
+            /* Horizontal scrolling tabs */
             .agents-tabs-container {
                 flex-direction: row !important;
                 overflow-x: auto;
-                gap: 12px !important;
+                gap: 8px !important;
                 padding-bottom: 4px;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
+                margin-top: 8px !important;
+                justify-content: center !important;
             }
+            
             .agents-tabs-container::-webkit-scrollbar {
                 display: none;
             }
+            
             .agents-tab-button {
+                min-width: 120px !important;
                 width: auto !important;
-                flex: 1;
+                flex-shrink: 0;
                 white-space: nowrap;
-                padding: 10px 14px !important;
+                padding: 12px 20px !important;
                 font-size: 14px !important;
                 justify-content: center !important;
             }
-            /* Hide arrow on mobile to center text better */
+            
             .agents-tab-button svg {
                 display: none;
             }
-
-            .agent-card-internal-left, .agent-card-internal-right {
-                padding: 24px !important;
+            
+            /* Agent Card Container */
+            .agent-card-container {
+                border: 1px solid rgba(110, 245, 178, 0.2) !important;
+                box-shadow: 0 10px 40px -10px rgba(110, 245, 178, 0.15) !important;
+                width: 100% !important;
+                max-width: 100% !important;
             }
+            
+            /* Agent Card Left Section - Center all content */
             .agent-card-internal-left {
-                padding-bottom: 32px !important;
+                padding: 32px 24px !important;
+                align-items: center !important;
+                text-align: center !important;
+            }
+            
+            .agent-info-wrapper {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                width: 100% !important;
+            }
+            
+            .agent-icon-box {
+                margin-left: auto !important;
+                margin-right: auto !important;
+                margin-bottom: 24px !important;
+            }
+            
+            .agent-text-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                width: 100% !important;
+            }
+            
+            .agent-text-content h3 {
+                text-align: center !important;
+                font-size: 24px !important;
+            }
+            
+            .agent-tags {
+                justify-content: center !important;
+                width: 100% !important;
+            }
+            
+            .agent-text-content p {
+                text-align: center !important;
+            }
+            
+            .demo-button {
+                margin-top: 24px !important;
+            }
+            
+            /* Agent Card Right Section */
+            .agent-card-internal-right {
+                padding: 32px 24px !important;
+            }
+            
+            .agent-card-internal-right h4 {
+                text-align: center !important;
+                margin-bottom: 20px !important;
+            }
+            
+            /* Workflow steps adjustments */
+            .workflow-steps {
+                gap: 12px !important;
+            }
+            
+            .workflow-steps > div {
+                padding: 14px !important;
+                gap: 12px !important;
+            }
+            
+            .workflow-steps h5 {
+                font-size: 13px !important;
+            }
+            
+            .workflow-steps p {
+                font-size: 12px !important;
+            }
+          }
+          
+          /* Small mobile devices */
+          @media (max-width: 480px) {
+            .agents-title {
+                font-size: 28px !important;
+            }
+            
+            .agent-card-internal-left,
+            .agent-card-internal-right {
+                padding: 24px 20px !important;
             }
           }
         `}</style>
